@@ -1,24 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
+<?xml version='1.0' encoding='utf-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom'>
 
   <title><![CDATA[Kashyap Kopparam]]></title>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2014-05-07T10:30:50+05:30</updated>
+  <link href='http://yoursite.com/atom.xml' rel='self'/>
+  <link href='http://yoursite.com/'/>
+  <updated>2014-05-07T13:43:52+05:30</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Kashyap Kopparam]]></name>
     
   </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+  <generator uri='http://octopress.org/'>Octopress</generator>
 
   
   <entry>
-    <title type="html"><![CDATA[Hello World]]></title>
-    <link href="http://yoursite.com/blog/2014/05/06/hello-world/"/>
+    <title type='html'><![CDATA[Hello World]]></title>
+    <link href='http://yoursite.com/blog/2014/05/06/hello-world/'/>
     <updated>2014-05-06T22:15:38+05:30</updated>
     <id>http://yoursite.com/blog/2014/05/06/hello-world</id>
-    <content type="html"><![CDATA[
+    <content type='html'><![CDATA[
 ]]></content>
   </entry>
   
