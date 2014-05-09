@@ -1,31 +1,14 @@
-<!DOCTYPE html>
 {% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
 {% include head.html %}
-<body>
-	<header>
-		<h1><a href='/'>{{ site.title }}</a></h1>
-		<h3>{{ site.subtitle }}</h3>
-	</header>
-	<nav>
-		<ul>
-			{% if page.title == 'index' or page.title == 'root' %}
-			<li><a href='#'>top</a></li>    
-			{% else %}
-			<li><a href='/'>blog</a></li>
-			{% endif %}
-			{% if page.title == 'index' %}
-			<li><a href='/'>blog</a></li>     
-			{% else %}
-			<li><a href='/index'>index</a></li>
-			{% endif %}     
-			<li><a href='/about'>about</a></li>
-		</ul>
-	</nav>
-	<section class='main'>
-		<hr>
-		{{ content | expand_urls: root_url }}
-	</section>
-	<footer>
-		<p>| <a href='http://octopress.org/'>octopress</a> | <a href='http://github.com/deakolt/octoflow'>octoflow theme</a> | <a href='http://pages.github.com/'>github pages</a> | <a href='{{ site.subscribe_rss }}'>rss</a> |</p>
-	</footer>
+<body {% if page.body_id %} id="{{ page.body_id }}" {% endif %} {% if page.sidebar == false %} class="no-sidebar" {% endif %} {% if page.sidebar == 'collapse' or site.sidebar == 'collapse' %} class="collapse-sidebar sidebar-footer" {% endif %}>
+  <header role="banner">{% include header.html %}</header>
+  <nav role="navigation">{% include navigation.html %}</nav>
+  <div id="main">
+    <div id="content">
+      {{ content | expand_urls: root_url }}
+    </div>
+  </div>
+  <footer role="contentinfo">{% include footer.html %}</footer>
+  {% include after_footer.html %}
 </body>
+</html>

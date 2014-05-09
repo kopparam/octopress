@@ -1,22 +1,17 @@
 ---
-layout: default
+layout: page
+footer: false
 ---
 
-<div class='index'>
-	{% for post in site.categories[page.category] %}
-	{% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
-	{% capture this_month %}{{ post.date | date: "%B" }}{% endcapture %}
-
-	{% unless year == this_year %}
-	{% assign year = this_year %}
-	<h5>{{ year }}</h5>
-	{% endunless %}
-
-	{% unless month == this_month %}
-	{% assign month = this_month %}
-	<h6>{{ month }}</h6>
-	{% endunless %}
-	<a href='{{ post.url }}'>{{post.title}}</a>
-	<br>
-	{% endfor %}
+<div id="blog-archives" class="category">
+{% for post in site.categories[page.category] %}
+{% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+{% unless year == this_year %}
+  {% assign year = this_year %}
+  <h2>{{ year }}</h2>
+{% endunless %}
+<article>
+  {% include archive_post.html %}
+</article>
+{% endfor %}
 </div>

@@ -1,53 +1,102 @@
-<?xml version='1.0' encoding='utf-8'?>
-<feed xmlns='http://www.w3.org/2005/Atom'>
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Kashyap Kopparam]]></title>
-  <link href='http://yoursite.com/atom.xml' rel='self'/>
-  <link href='http://yoursite.com/'/>
-  <updated>2014-05-07T18:20:11+05:30</updated>
+  <link href="http://yoursite.com/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2014-05-09T14:52:51+05:30</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Kashyap Kopparam]]></name>
     
   </author>
-  <generator uri='http://octopress.org/'>Octopress</generator>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title type='html'><![CDATA[Set up OpenStack on a development evironment]]></title>
-    <link href='http://yoursite.com/blog/2014/05/07/set-up-openstack-on-a-development-evironment/'/>
+    <title type="html"><![CDATA[Set up OpenStack on a development evironment]]></title>
+    <link href="http://yoursite.com/blog/2014/05/07/set-up-openstack-on-a-development-evironment/"/>
     <updated>2014-05-07T18:19:34+05:30</updated>
     <id>http://yoursite.com/blog/2014/05/07/set-up-openstack-on-a-development-evironment</id>
-    <content type='html'><![CDATA[<p>To develop something, having a proper environment setup is key. This post explains how you can set up a development environment to contribute to OpenStack. I&rsquo;m going to use DevStack which is a shell script that builds OpenStack completely in a developer friendly environment.</p>
+    <content type="html"><![CDATA[<p>To develop something, having a proper environment setup is key. This post explains how you can set up a development environment to contribute to OpenStack. I&rsquo;m going to use DevStack which is a shell script that builds OpenStack completely in a developer friendly environment.</p>
 
-<ol>
-<li><p>Virtual Machine
-Firstly, set up a virtual machine running any of the supported distro/release of DevStack. Ubuntu 12.04, Fedora 20, CentOS/RHEL 6.5 are supported.
-Any type of virtualisation software should be fine, I use Vagrant because it is easier to manage the instances.
-After a VM is up and running, install a Linux distribution. I have installed Ubuntu 14.04 (it is not officially supported, but it works for me).</p></li>
-<li><p>Setup user
-At this point, we have a VM running a Linux OS. We need to create a user called &lsquo;stack&rsquo;. For Red Hat and the like, &lsquo;stack&rsquo; should be a non-root user, this does not matter in Ubuntu.</p></li>
-<li><p>Setup the VM
-We need to install git and clone the DevStack repository
-sudo apt-get update<br/>
-sudo apt-get install git<br/>
-cd ~<br/>
-git clone <a href="https://github.com/openstack-dev/devstack.git">https://github.com/openstack-dev/devstack.git</a></p></li>
-<li><p>Now is the fun part, well almost
-Working with OpenStack means you got to remember passwords for admin, database, rabbit etc. Your life is a lot simpler with a bit of configuration. Edit the local.conf file in the repository&rsquo;s root to look like this.
-[[local|localrc]]<br/>
-ADMIN_PASSWORD=secrete<br/>
-DATABASE_PASSWORD=$ADMIN_PASSWORD<br/>
-RABBIT_PASSWORD=$ADMIN_PASSWORD<br/>
-SERVICE_PASSWORD=$ADMIN_PASSWORD<br/>
-SERVICE_TOKEN=some_token</p></li>
-<li><p>Ok, the fun part
-  simply run stack.sh and keep your eyes peeled
-./stack.sh</p></li>
-<li><p>Using DevStack
-stack.sh takes a long time to execute. After it has completed successfully, it displays information about your newly chromed OpenStack install. You can log in to Horizon, which is the web UI dashboard to manage your VMs.
-Be careful when you reboot your VM. If you ever need to reboot, you have to run unstack.sh and then reboot. After the reboot you need to run rejoin-stack.sh to get the services running again.</p></li>
-</ol>
+<h2>Virtual Machine</h2>
+
+<p>Firstly, set up a virtual machine running any of the supported distro/release of DevStack. Ubuntu 12.04, Fedora 20, CentOS/RHEL 6.5 are supported. Any type of virtualisation software should be fine, I use Vagrant because it is easier to manage the instances.
+After a VM is up and running, install a Linux distribution. I have installed Ubuntu 14.04 (it is not officially supported, but it works just fine).</p>
+
+<h2>Setup user</h2>
+
+<p>At this point, we have a VM running a Linux OS. We need to create a user called <em>stack</em>. For Red Hat and the like, <em>stack</em> should be a non-root user, this does not matter in Ubuntu.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo adduser stack
+</span><span class='line'><span class="nv">$ </span>sudo adduser stack sudo <span class="c"># only for Ubuntu if you need stack to be a sudoer</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Setup the VM</h2>
+
+<p>We need to install git and clone the DevStack repository</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo apt-get update
+</span><span class='line'><span class="nv">$ </span>sudo apt-get install git
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~
+</span><span class='line'><span class="nv">$ </span>git clone https://github.com/openstack-dev/devstack.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Now is the fun part, well almost</h2>
+
+<p>Working with OpenStack means you got to remember passwords for admin, database, rabbit etc. Your life is a lot simpler with a bit of configuration. Edit the local.conf file in the repository&rsquo;s root to look like this.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[[</span><span class="nb">local</span>|localrc<span class="o">]]</span>
+</span><span class='line'><span class="nv">ADMIN_PASSWORD</span><span class="o">=</span>secrete
+</span><span class='line'><span class="nv">DATABASE_PASSWORD</span><span class="o">=</span><span class="nv">$ADMIN_PASSWORD</span>
+</span><span class='line'><span class="nv">RABBIT_PASSWORD</span><span class="o">=</span><span class="nv">$ADMIN_PASSWORD</span>
+</span><span class='line'><span class="nv">SERVICE_PASSWORD</span><span class="o">=</span><span class="nv">$ADMIN_PASSWORD</span>
+</span><span class='line'><span class="nv">SERVICE_TOKEN</span><span class="o">=</span>some_token
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Ok, the fun part</h2>
+
+<p>Simply run stack.sh and keep your eyes peeled</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>./stack.sh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Using DevStack</h2>
+
+<p>stack.sh takes a long time to execute. After it has completed successfully, it displays information about your newly chromed OpenStack install. You can log in to Horizon, which is the web UI dashboard to manage your VMs.
+Be careful when you reboot your VM. If you ever need to reboot, you have to run unstack.sh and then reboot. After the reboot you need to run rejoin-stack.sh to get the services running again.</p>
+
+<h2>Other stuff</h2>
+
+<p>Let&rsquo;s face it. It is impossible to keep up with the output that <em>stack.sh</em> throws at you. We&rsquo;ll need to edit the <code>local.conf</code> file to log it by setting <code>LOGFILE</code>. DevStack runs all OpenStack services on a screen session. To log this screen we can set the <code>SCREEN_LOGDIR</code> variable.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">LOGFILE</span><span class="o">=</span>/opt/stack/logs/stack.sh.log
+</span><span class='line'><span class="nv">VERBOSE</span><span class="o">=</span>True
+</span><span class='line'><span class="nv">LOG_COLOR</span><span class="o">=</span>True
+</span><span class='line'><span class="nv">SCREEN_LOGDIR</span><span class="o">=</span>/opt/stack/logs
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Enjoy your OpenStack and please contribute to the OpenSource community.</p>
@@ -55,11 +104,11 @@ Be careful when you reboot your VM. If you ever need to reboot, you have to run 
   </entry>
   
   <entry>
-    <title type='html'><![CDATA[Hello World]]></title>
-    <link href='http://yoursite.com/blog/2014/05/06/hello-world/'/>
+    <title type="html"><![CDATA[Hello World]]></title>
+    <link href="http://yoursite.com/blog/2014/05/06/hello-world/"/>
     <updated>2014-05-06T22:15:38+05:30</updated>
     <id>http://yoursite.com/blog/2014/05/06/hello-world</id>
-    <content type='html'><![CDATA[<p>I decided to start blogging to contribute back to the community that has given me a sea of informantion. Also, it serves as a journal of sorts. This blog will mainly be technical and a few fun stuff every now and then.</p>
+    <content type="html"><![CDATA[<p>I decided to start blogging to contribute back to the community that has given me a sea of informantion. Also, it serves as a journal of sorts. This blog will mainly be technical and a few fun stuff every now and then.</p>
 ]]></content>
   </entry>
   
