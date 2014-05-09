@@ -7,6 +7,7 @@ categories:
 ---
 
 To develop something, having a proper environment setup is key. This post explains how you can set up a development environment to contribute to OpenStack. I'm going to use DevStack which is a shell script that builds OpenStack completely in a developer friendly environment.
+<!--more-->
  
 ##Virtual Machine
 
