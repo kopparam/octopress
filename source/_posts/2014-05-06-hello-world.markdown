@@ -12,6 +12,8 @@ That is where blogs save the world, no documentaion can be exaustive and going t
 
 It was back in high school when I first got a taste for technolgy in general and soon enough I fell in love with coding. You might be wonderning why I have taken so long to start blogging especially that I'm a tech guy. Well, I never had an "Ungoogalable" situation till recent times when I finaly have caught up to the latest technologies where everything won't go as smoothly as expected.
 
->There is no wealth like knowledge,
->and no poverty like ignorance.
-> - Buddha
+>Information is Power.
+>But like all power,
+>there are those who want to
+>keep it to themseleves.
+> - Aaron Swartz
