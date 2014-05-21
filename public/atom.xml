@@ -4,7 +4,7 @@
   <title><![CDATA[Kashyap Kopparam]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2014-05-09T15:53:47+05:30</updated>
+  <updated>2014-05-21T17:54:53+05:30</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Kashyap Kopparam]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cutomise Horizon: OpenStack's Dashboard]]></title>
+    <link href="http://yoursite.com/blog/2014/05/21/cutomise-horizon-openstacks-dashboard/"/>
+    <updated>2014-05-21T17:07:46+05:30</updated>
+    <id>http://yoursite.com/blog/2014/05/21/cutomise-horizon-openstacks-dashboard</id>
+    <content type="html"><![CDATA[<p>Horizon is a web based user interface to manage Openstack services like Nova, Neutron, Glance, etc. It was Canonical who went ahead and implemented this from Openstack&rsquo;s Dashboard. It is a Django-based project which builds on a Django site which uses <code>dashboard</code> to communicate with the Openstack services. My goal here was to cutomize it to put in my own logo.</p>
+
+<!--more-->
+
+
+<h2>Follow the Docs</h2>
+
+<p>I have never worked on Django framework so I intutively started looking at the docs to give me pointers to where to look for the css which linked to the logo image file. I first looked <a href="http://docs.openstack.org/havana/config-reference/content/dashboard-custom-brand.html">here</a>, but realized that this was the original <strong>Dashboard</strong> and not the Canonical&rsquo;s Horizon that was working with. Well, it&rsquo;s a shame that I had to put in the raged comment there. But, it is really very easy to get that page confused with Horizon.</p>
+
+<p>A little more looking at I found <a href="http://docs.openstack.org/developer/horizon/topics/customizing.html">this</a>. It clearly says Horizon, so looks like we are going somewhere now. But I just could not find the file:<code>openstack_dashboard/local/local_settings.py</code> in the very first instruction which can change the page titile.</p>
+
+<h2>Why are you doing this to me?</h2>
+
+<p>After being disheartened by not able to find the file, I read on. Oh! there is a file location specified for something else, maybe it&rsquo;s there. The <code>local_setting.py</code> is in <code>/usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.py</code>. Just include a line to get a custom page title <code>SITE_BRANDING="This is my Openstack"</code> in that file.</p>
+
+<p>Now, I wanted to replace the OpenStack logo which appears when I login and after the login in my dashboard with my own logo. The next section in the <a href="http://docs.openstack.org/developer/horizon/topics/customizing.html">document</a> gives me instructions for exactly that. I just had to replace the image file at <code>/usr/share/openstack-dashboard/openstack_dashboard/static/dashboard/img/logo.png.</code> But, I dont see what I&rsquo;m supposed to see. The old image is still there.</p>
+
+<h2>Inspect element</h2>
+
+<p>At this point of time, I&rsquo;m questioning the effectiveness of the documentation. I close the document. And open up Chrome and use the developer tools on the dashboard. I find some wierd hexa after the url <code>url('/static/dashboard/img/logo-splash.png?bd0a834bae0e')</code>. And I soon realize that this css is in <code>/usr/share/openstack-dashboard/static/dashboard/css</code>. And it has been reletively referencing to the <code>img</code> directory. That is not where I put my logo.</p>
+
+<p>What&rsquo;s done is done. So, I replace <code>logo-splash.png</code> and <code>logo.png</code> in the <code>/usr/share/openstack-dashboard/static/dashboard/img</code> directory. And finally I have my logo show up at the login screen. But, the old Openstack logo shows up after you login.</p>
+
+<p>I dive right into the css remove the funny hexa on the url. And edit a little css to get my logo to look nice here. Looks like Horizon uses a css compressor to make your pages load faster. I have never used one and do not know how they work. So to get your logo at the dashboard edit the css file <code>/usr/share/openstack-dashboard/static/dashboard/css/291184af72d2.css</code> (it might be different name for you)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">h1</span><span class="nc">.brand</span> <span class="nt">a</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background</span><span class="o">:</span> <span class="sx">url(&#39;/static/dashboard/img/logo.png&#39;)</span> <span class="k">top</span> <span class="k">center</span> <span class="k">no-repeat</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">width</span><span class="o">:</span> <span class="m">166px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">height</span><span class="o">:</span> <span class="m">123px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">text-indent</span><span class="o">:</span> <span class="m">-9999px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">margin-left</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">margin-top</span><span class="o">:</span> <span class="m">15px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">margin-bottom</span><span class="o">:</span> <span class="m">25px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hope this helps you brand your OpenStack install. And please dive right into the code if you ever feel the documentation is not getting you anywhere.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Set up OpenStack on a development evironment]]></title>
@@ -118,13 +177,14 @@ Be careful when you reboot your VM. If you ever need to reboot, you have to run 
 
 <p>That is where blogs save the world, no documentaion can be exaustive and going through long threads in forums can be a pain. Blogs however are written by people who have been in the same painful situation and who do not want others to go through the same. This is exactly why I&rsquo;m starting this blog. Also, it serves as a journal of sorts. This blog will mainly be technical and a few fun stuff every now and then.</p>
 
-<p>It was back in high school when I first got a taste for technolgy in general and soon enough I fell in love with coding. You might be wonderning why I have taken so long to start blogging especially that I&rsquo;m a tech guy. Well, I never had an &ldquo;Ungoogalable&rdquo; situation till recent times when I finaly have caught up to the latest technologies where everything won&rsquo;t go as smoothly as expected.</p>
+<p>It was back in high school when I first got a taste for technolgy in general and soon enough I fell in love with coding. You might be wonderning why I have taken so long to start blogging especially that I&rsquo;m a tech guy. Well, I never had an &ldquo;Ungooglable&rdquo; situation till recent times when I finaly have caught up to the latest technologies where everything won&rsquo;t go as smoothly as expected.</p>
 
 <blockquote><p>Information is Power.
 But like all power,
 there are those who want to
-keep it to themseleves.
-&ndash; Aaron Swartz</p></blockquote>
+keep it to themseleves.</p>
+
+<p>- Aaron Swartz</p></blockquote>
 ]]></content>
   </entry>
   

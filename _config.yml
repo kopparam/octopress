@@ -98,3 +98,15 @@ google_analytics_tracking_id:
 
 # Facebook Like
 facebook_like: false
+
+# octopress-page-view
+page-view:
+  service_account_email: 647968705961-6s4ccrj66lm51r5k48t6k5uljul8fnmv@developer.gserviceaccount.com    # XXXXXX@developer.gserviceaccount.com
+  key_file: b5b25195654cd1cc7835333fdd323c9d820c4307-privatekey.p12  # service account private key file
+  key_secret: notasecret    # service account private key's password
+  profileID: ga:50980560              # ga:XXXXXXXX
+  start: 3 years ago        # Beginning of report
+  end: now                  # End of report
+  metric: ga:pageviews      # Metric code
+  segment: gaid::-1         # All visits
+  filters:                  # optional

@@ -2,7 +2,7 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://yoursite.com/blog/2014/05/06/hello-world/</loc>
-        <lastmod>2014-05-09T15:53:33+05:30</lastmod>
+        <lastmod>2014-05-10T11:00:22+05:30</lastmod>
     </url>
     <url>
         <loc>
@@ -11,24 +11,28 @@
         <lastmod>2014-05-09T15:38:11+05:30</lastmod>
     </url>
     <url>
+        <loc>http://yoursite.com/blog/2014/05/21/cutomise-horizon-openstacks-dashboard/</loc>
+        <lastmod>2014-05-21T17:54:53+05:30</lastmod>
+    </url>
+    <url>
         <loc>http://yoursite.com/404.html</loc>
         <lastmod>2014-05-09T15:38:11+05:30</lastmod>
     </url>
     <url>
         <loc>http://yoursite.com/about/</loc>
-        <lastmod>2014-05-09T15:53:33+05:30</lastmod>
+        <lastmod>2014-05-21T17:54:53+05:30</lastmod>
     </url>
     <url>
         <loc>http://yoursite.com/blog/archives/</loc>
-        <lastmod>2014-05-09T15:53:33+05:30</lastmod>
+        <lastmod>2014-05-21T17:54:53+05:30</lastmod>
     </url>
     <url>
         <loc>http://yoursite.com/index/</loc>
-        <lastmod>2014-05-09T15:53:33+05:30</lastmod>
+        <lastmod>2014-05-21T17:54:53+05:30</lastmod>
     </url>
     <url>
         <loc>http://yoursite.com/</loc>
-        <lastmod>2014-05-09T15:53:33+05:30</lastmod>
+        <lastmod>2014-05-21T17:54:53+05:30</lastmod>
     </url>
     <url>
         <loc>http://yoursite.com/robots.txt</loc>
