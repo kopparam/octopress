@@ -6,15 +6,15 @@ comments: true
 categories: 
 ---
 
-Horizon is a web based user interface to manage Openstack services like Nova, Neutron, Glance, etc. It was Canonical who went ahead and implemented this from Openstack's Dashboard. It is a Django-based project which builds on a Django site which uses `dashboard` to communicate with the Openstack services. My goal here was to cutomize it to put in my own logo.
+Horizon is a web based user interface to manage Openstack services like Nova, Neutron, Glance, etc. It was Canonical who went ahead and implemented this from Openstack's Dashboard. It is a Django-based project which builds on a Django site which uses `dashboard` to communicate with the Openstack services. My goal here was to customize it to put in my own logo.
 
 <!--more-->
 
 ## Follow the Docs
 
-I have never worked on Django framework so I intutively started looking at the docs to give me pointers to where to look for the css which linked to the logo image file. I first looked [here](http://docs.openstack.org/havana/config-reference/content/dashboard-custom-brand.html), but realized that this was the original **Dashboard** and not the Canonical's Horizon that was working with. Well, it's a shame that I had to put in the raged comment there. But, it is really very easy to get that page confused with Horizon. 
+I have never worked on Django framework so I intuitively started looking at the docs to give me pointers to where to look for the css which linked to the logo image file. I first looked [here](http://docs.openstack.org/havana/config-reference/content/dashboard-custom-brand.html), but realized that this was the original **Dashboard** and not the Canonical's Horizon that was working with. Well, it's a shame that I had to put in the raged comment there. But, it is really very easy to get that page confused with Horizon. 
 
-A little more looking at I found [this](http://docs.openstack.org/developer/horizon/topics/customizing.html). It clearly says Horizon, so looks like we are going somewhere now. But I just could not find the file:`openstack_dashboard/local/local_settings.py` in the very first instruction which can change the page titile.
+A little more looking at I found [this](http://docs.openstack.org/developer/horizon/topics/customizing.html). It clearly says Horizon, so looks like we are going somewhere now. But I just could not find the file:`openstack_dashboard/local/local_settings.py` in the very first instruction which can change the page title.
 
 ## Why are you doing this to me?
 
@@ -24,7 +24,7 @@ Now, I wanted to replace the OpenStack logo which appears when I login and after
 
 ## Inspect element
 
-At this point of time, I'm questioning the effectiveness of the documentation. I close the document. And open up Chrome and use the developer tools on the dashboard. I find some wierd hexa after the url `url('/static/dashboard/img/logo-splash.png?bd0a834bae0e')`. And I soon realize that this css is in `/usr/share/openstack-dashboard/static/dashboard/css`. And it has been reletively referencing to the `img` directory. That is not where I put my logo.
+At this point of time, I'm questioning the effectiveness of the documentation. I close the document. And open up Chrome and use the developer tools on the dashboard. I find some weird hexa after the url `url('/static/dashboard/img/logo-splash.png?bd0a834bae0e')`. And I soon realize that this css is in `/usr/share/openstack-dashboard/static/dashboard/css`. And it has been relatively referencing to the `img` directory. That is not where I put my logo.
 
 What's done is done. So, I replace `logo-splash.png` and `logo.png` in the `/usr/share/openstack-dashboard/static/dashboard/img` directory. And finally I have my logo show up at the login screen. But, the old Openstack logo shows up after you login.
 
